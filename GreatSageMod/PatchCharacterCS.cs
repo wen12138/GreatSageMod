@@ -32,6 +32,7 @@ namespace GreatSageMod
                 }
 
                 var oriComp = entMgr?.GetObject<b1.BUS_QiTianDaShengComp>(__instance.ECSEntity);
+                var newComp = new BUS_QiTianDaShengComp();
                 if (oriComp != null)
                 {
                     Type compContainerType = __instance.ActorCompContainerCS.GetType();
@@ -44,6 +45,8 @@ namespace GreatSageMod
                             var compList = compCSs.GetValue(__instance.ActorCompContainerCS) as List<UActorCompBaseCS>;
                             compList.Remove(oriComp);
                             removeCount++;
+                            compList.Add(newComp);
+                            Console.WriteLine("从CompCSs移除了原始的齐天大圣组件"); 
                         }
                     }
 
@@ -54,12 +57,15 @@ namespace GreatSageMod
                             var compList = compCSs.GetValue(__instance.ActorCompContainerCS) as List<UActorCompBaseCS>;
                             compList.Remove(oriComp);
                             removeCount++;
+                            compList.Add(newComp);
+                            Console.WriteLine("从CompCSsToBeginPlay移除了原始的齐天大圣组件");
                         }
                     }
 
                     if (removeCount == 2)
                     {
                         entMgr.RemoveObject(__instance.ECSEntity, oriComp);
+                        Console.WriteLine("从EntityManager中移除了原始的齐天大圣组件");
 
                         if (oriComp.IsNetActive())
                         {
@@ -67,9 +73,12 @@ namespace GreatSageMod
                         }
 
                         oriComp.OnEndPlay(UnrealEngine.Engine.EEndPlayReason.Destroyed);
+
+                        newComp.Init(__instance.ActorCompContainerCS);
+                        newComp.OnAttach();
+                        entMgr.SetObject(__instance.ECSEntity, TypeManager.GetTypeIndex<b1.BUS_QiTianDaShengComp>(), newComp);
                     }
 
-                    __instance.ActorCompContainerCS.AddComp(new BUS_QiTianDaShengComp(), int.MaxValue, 0);
                     Console.WriteLine("成功替换天命人齐天大圣组件!");
                 }
                 else

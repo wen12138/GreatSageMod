@@ -30,6 +30,8 @@ namespace GreatSageMod
             base.BUSEventCollection.Evt_TriggerBanTrans2DaSheng += this.OnTriggerBanTrans2DaSheng;
             base.BUSEventCollection.Evt_ResetDaShengStatus += this.OnResetDaShengStatus;
             base.BUSEventCollection.Evt_AfterUnitRebirth += this.OnAfterUnitRebirth;
+
+            Console.WriteLine("齐天大圣组件 OnAttach 成功!");
         }
 
         private void TryGetRoleData()
@@ -79,14 +81,15 @@ namespace GreatSageMod
                 this.bHasInit = true;
                 int configID = this.IsInHGSLevel() ? BUS_QiTianDaShengComp.HGS_DASHENG_CONFIG_ID : BUS_QiTianDaShengComp.NORMAL_DASHENG_CONFIG_ID;
                 this.InitDaShengConfig(configID);
+                Console.WriteLine("齐天大圣组件 OnTickWithGroup Init 成功!");
             }
             if (this.bHasInit)
             {
-                if (this.SimpleStateData.HasSimpleState(EBGUSimpleState.BanTrans2DaSheng) || this.QiTianDaShengData.bIsBanTrans2DaSheng)
-                {
-                    this.Reset2LittleMonkey();
-                    return;
-                }
+                //if (this.SimpleStateData.HasSimpleState(EBGUSimpleState.BanTrans2DaSheng) || this.QiTianDaShengData.bIsBanTrans2DaSheng)
+                //{
+                //    this.Reset2LittleMonkey();
+                //    return;
+                //}
                 switch (this.QiTianDaShengData.DaShengStage)
                 {
                     case EDaShengStage.LittleMonkey:
