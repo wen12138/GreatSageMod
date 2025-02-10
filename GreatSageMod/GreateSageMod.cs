@@ -1,4 +1,5 @@
 ﻿using CSharpModBase;
+using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,14 +14,20 @@ namespace GreatSageMod
 
         public string Version => "0.0.1";
 
-        public void DeInit()
-        {
-            
-        }
+        private Harmony m_Harmony;
 
         public void Init()
         {
-            //Utils.
+            Console.WriteLine("初始化齐天大圣Mod!!!");
+            m_Harmony = new Harmony("GreateSageMode.Patch");
+            m_Harmony.PatchAll();
         }
+
+        public void DeInit()
+        {
+            m_Harmony?.UnpatchAll();
+            Console.WriteLine("解除齐天大圣Mod!!!");
+        }
+
     }
 }

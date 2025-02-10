@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using ArchiveB1;
 using b1;
 using BtlB1;
 using BtlShare;
+using CommB1;
 using UnrealEngine.Engine;
 
 namespace GreatSageMod
@@ -14,6 +16,8 @@ namespace GreatSageMod
         // Token: 0x0600513B RID: 20795 RVA: 0x0013E8FC File Offset: 0x0013CAFC
         public override void OnAttach()
         {
+            TryGetRoleData();
+
             this.QiTianDaShengData = base.RequireWritableData<BUC_QiTianDaShengData>();
             this.EquipData = base.RequireReadOnlyData<IBUC_EquipData, BUC_EquipData>();
             this.BuffData = base.RequireReadOnlyData<IBUC_BuffData, BUC_BuffData>();
@@ -26,6 +30,32 @@ namespace GreatSageMod
             base.BUSEventCollection.Evt_TriggerBanTrans2DaSheng += this.OnTriggerBanTrans2DaSheng;
             base.BUSEventCollection.Evt_ResetDaShengStatus += this.OnResetDaShengStatus;
             base.BUSEventCollection.Evt_AfterUnitRebirth += this.OnAfterUnitRebirth;
+        }
+
+        private void TryGetRoleData()
+        {
+            var gameplayer = GSGBtl.GetLocalPlayerContainer().GamePlayer;
+            if (gameplayer == null)
+            {
+                Console.WriteLine("齐天大圣组件获取玩家失败!");
+                return;
+            }
+
+            Console.WriteLine("齐天大圣组件获取玩家成功!");
+            var type = gameplayer.GetType();
+            var field = type.GetField("RootData", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
+            if (field != null)
+            {
+                RoleData = field.GetValue(gameplayer) as DSRoleData;
+                if (RoleData != null)
+                {
+                    Console.WriteLine("齐天大圣组件获取玩家数据成功!");
+                }
+                else
+                {
+                    Console.WriteLine("齐天大圣组件获取玩家数据失败!");
+                }
+            }
         }
 
         // Token: 0x0600513C RID: 20796 RVA: 0x0013E9FC File Offset: 0x0013CBFC
@@ -66,15 +96,12 @@ namespace GreatSageMod
                         }
                         if (this.CheckCanKeepDaShengMode())
                         {
-                            //if (this.IsInHGSLevel())
-                            //{
-                            //    this.TrySwitch2DaShengMode(EDaShengStage.LittleMonkey);
-                            //    return;
-                            //}
-                            //this.TrySwitch2PreStage(EDaShengStage.LittleMonkey);
-
-                            this.TrySwitch2DaShengMode(EDaShengStage.LittleMonkey);
-                            return;
+                            if (this.IsInHGSLevel())
+                            {
+                                this.TrySwitch2DaShengMode(EDaShengStage.LittleMonkey);
+                                return;
+                            }
+                            this.TrySwitch2PreStage(EDaShengStage.LittleMonkey);
                         }
                         break;
                     case EDaShengStage.PreStage:
@@ -87,6 +114,7 @@ namespace GreatSageMod
                     case EDaShengStage.DaShengMode:
                         {
                             bool flag = this.CheckCanKeepDaShengMode();
+                            bool flag2 = RoleData != null && RoleData.RoleCs.Actor.Wear.Stance == Stance.Prop;
                             if (!this.IsInHGSLevel())
                             {
                                 this.QiTianDaShengData.DaShengDurationTimer -= DeltaTime;
@@ -95,7 +123,7 @@ namespace GreatSageMod
                                     flag = false;
                                 }
                             }
-                            if (!flag)
+                            if (!flag && !flag2)
                             {
                                 this.TrySwitch2LittleMonkey(EDaShengStage.DaShengMode);
                             }
@@ -131,26 +159,27 @@ namespace GreatSageMod
         // Token: 0x06005140 RID: 20800 RVA: 0x0013EC20 File Offset: 0x0013CE20
         private bool CheckCanKeepDaShengMode()
         {
-            if (this.IsInHGSLevel())
-            {
-                bool result = false;
-                if (this.QiTianDaShengData.RelatedEquipIDList.Count > 0)
-                {
-                    result = this.QiTianDaShengData.RelatedEquipIDList.All((int item) => this.EquipData.SelfEquipMap.Values.Contains(item));
-                }
-                return result;
-            }
-            bool flag = false;
-            bool flag2 = false;
-            if (this.QiTianDaShengData.RelatedEquipIDList.Count > 0)
-            {
-                flag = this.QiTianDaShengData.RelatedEquipIDList.All((int item) => this.EquipData.SelfEquipMap.Values.Contains(item));
-            }
-            if (this.QiTianDaShengData.RelatedTalentIDList.Count > 0)
-            {
-                flag2 = this.QiTianDaShengData.RelatedTalentIDList.All((int item) => this.RoleBaseData.TalenList.Keys.Contains(item));
-            }
-            return flag && flag2;
+            //if (this.IsInHGSLevel())
+            //{
+            //    bool result = false;
+            //    if (this.QiTianDaShengData.RelatedEquipIDList.Count > 0)
+            //    {
+            //        result = this.QiTianDaShengData.RelatedEquipIDList.All((int item) => this.EquipData.SelfEquipMap.Values.Contains(item));
+            //    }
+            //    return result;
+            //}
+            //bool flag = false;
+            //bool flag2 = false;
+            //if (this.QiTianDaShengData.RelatedEquipIDList.Count > 0)
+            //{
+            //    flag = this.QiTianDaShengData.RelatedEquipIDList.All((int item) => this.EquipData.SelfEquipMap.Values.Contains(item));
+            //}
+            //if (this.QiTianDaShengData.RelatedTalentIDList.Count > 0)
+            //{
+            //    flag2 = this.QiTianDaShengData.RelatedTalentIDList.All((int item) => this.RoleBaseData.TalenList.Keys.Contains(item));
+            //}
+            //return flag && flag2;
+            return true;
         }
 
         // Token: 0x06005141 RID: 20801 RVA: 0x0013ECD0 File Offset: 0x0013CED0
@@ -341,6 +370,10 @@ namespace GreatSageMod
             {
                 this.TrySwitch2DaShengMode(this.QiTianDaShengData.DaShengStage);
             }
+            else
+            {
+                this.TrySwitch2DaShengMode(EDaShengStage.LittleMonkey);
+            }
         }
 
         // Token: 0x06005149 RID: 20809 RVA: 0x0013F3F4 File Offset: 0x0013D5F4
@@ -348,7 +381,7 @@ namespace GreatSageMod
         {
             //this.QiTianDaShengData.bIsBanTrans2DaSheng = false;
             //this.QiTianDaShengData.DaShengDurationTimer = -1f;
-            //this.Reset2LittleMonkey();
+            this.Reset2LittleMonkey();
         }
 
         // Token: 0x0600514A RID: 20810 RVA: 0x0013F418 File Offset: 0x0013D618
@@ -380,7 +413,7 @@ namespace GreatSageMod
         private static int HGS_SHI_ZHONG_JING_LEVEL_ID = 61;
 
         // Token: 0x04003FDC RID: 16348
-        private static float NORMAL_DASHENG_DURATION = 60f;
+        private static float NORMAL_DASHENG_DURATION = 86400f;
 
         // Token: 0x04003FDD RID: 16349
         private BUC_QiTianDaShengData QiTianDaShengData;
@@ -405,5 +438,7 @@ namespace GreatSageMod
 
         // Token: 0x04003FE4 RID: 16356
         private bool bHasInit;
+
+        private DSRoleData RoleData;
     }
 }
