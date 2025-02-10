@@ -85,11 +85,11 @@ namespace GreatSageMod
             }
             if (this.bHasInit)
             {
-                //if (this.SimpleStateData.HasSimpleState(EBGUSimpleState.BanTrans2DaSheng) || this.QiTianDaShengData.bIsBanTrans2DaSheng)
-                //{
-                //    this.Reset2LittleMonkey();
-                //    return;
-                //}
+                if (this.SimpleStateData.HasSimpleState(EBGUSimpleState.BanTrans2DaSheng) || this.QiTianDaShengData.bIsBanTrans2DaSheng)
+                {
+                    this.Reset2LittleMonkey();
+                    return;
+                }
                 switch (this.QiTianDaShengData.DaShengStage)
                 {
                     case EDaShengStage.LittleMonkey:
@@ -117,7 +117,7 @@ namespace GreatSageMod
                     case EDaShengStage.DaShengMode:
                         {
                             bool flag = this.CheckCanKeepDaShengMode();
-                            bool flag2 = RoleData != null && RoleData.RoleCs.Actor.Wear.Stance == Stance.Prop;
+                            //bool flag2 = RoleData != null && RoleData.RoleCs.Actor.Wear.Stance == Stance.Prop;
                             if (!this.IsInHGSLevel())
                             {
                                 this.QiTianDaShengData.DaShengDurationTimer -= DeltaTime;
@@ -126,7 +126,7 @@ namespace GreatSageMod
                                     flag = false;
                                 }
                             }
-                            if (!flag && !flag2)
+                            if (!flag)
                             {
                                 this.TrySwitch2LittleMonkey(EDaShengStage.DaShengMode);
                             }
@@ -162,27 +162,27 @@ namespace GreatSageMod
         // Token: 0x06005140 RID: 20800 RVA: 0x0013EC20 File Offset: 0x0013CE20
         private bool CheckCanKeepDaShengMode()
         {
-            //if (this.IsInHGSLevel())
-            //{
-            //    bool result = false;
-            //    if (this.QiTianDaShengData.RelatedEquipIDList.Count > 0)
-            //    {
-            //        result = this.QiTianDaShengData.RelatedEquipIDList.All((int item) => this.EquipData.SelfEquipMap.Values.Contains(item));
-            //    }
-            //    return result;
-            //}
-            //bool flag = false;
-            //bool flag2 = false;
-            //if (this.QiTianDaShengData.RelatedEquipIDList.Count > 0)
-            //{
-            //    flag = this.QiTianDaShengData.RelatedEquipIDList.All((int item) => this.EquipData.SelfEquipMap.Values.Contains(item));
-            //}
-            //if (this.QiTianDaShengData.RelatedTalentIDList.Count > 0)
-            //{
-            //    flag2 = this.QiTianDaShengData.RelatedTalentIDList.All((int item) => this.RoleBaseData.TalenList.Keys.Contains(item));
-            //}
-            //return flag && flag2;
-            return true;
+            if (this.IsInHGSLevel())
+            {
+                bool result = false;
+                if (this.QiTianDaShengData.RelatedEquipIDList.Count > 0)
+                {
+                    result = this.QiTianDaShengData.RelatedEquipIDList.All((int item) => this.EquipData.SelfEquipMap.Values.Contains(item));
+                }
+                return result;
+            }
+            bool flag = false;
+            bool flag2 = false;
+            if (this.QiTianDaShengData.RelatedEquipIDList.Count > 0)
+            {
+                flag = this.QiTianDaShengData.RelatedEquipIDList.All((int item) => this.EquipData.SelfEquipMap.Values.Contains(item));
+            }
+            if (this.QiTianDaShengData.RelatedTalentIDList.Count > 0)
+            {
+                flag2 = this.QiTianDaShengData.RelatedTalentIDList.All((int item) => this.RoleBaseData.TalenList.Keys.Contains(item));
+            }
+            return flag && flag2;
+            //return true;
         }
 
         // Token: 0x06005141 RID: 20801 RVA: 0x0013ECD0 File Offset: 0x0013CED0
@@ -382,8 +382,8 @@ namespace GreatSageMod
         // Token: 0x06005149 RID: 20809 RVA: 0x0013F3F4 File Offset: 0x0013D5F4
         private void OnTriggerBanTrans2DaSheng()
         {
-            //this.QiTianDaShengData.bIsBanTrans2DaSheng = false;
-            //this.QiTianDaShengData.DaShengDurationTimer = -1f;
+            this.QiTianDaShengData.bIsBanTrans2DaSheng = false;
+            this.QiTianDaShengData.DaShengDurationTimer = -1f;
             this.Reset2LittleMonkey();
         }
 

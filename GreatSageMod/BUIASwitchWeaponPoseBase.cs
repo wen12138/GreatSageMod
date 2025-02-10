@@ -18,6 +18,8 @@ namespace GreatSageMod
         // Token: 0x0601147A RID: 70778 RVA: 0x00498804 File Offset: 0x00496A04
         protected override bool OnTriggerInputAction(int InputActionID, ETriggerEvent TriggerEvent, ref b1.FInputActionValue Value, GSPredictionKey PredictionKey)
         {
+            Console.WriteLine($"OnTriggerInputAction!! TriggerEvent: {TriggerEvent} Begin!!!");
+
             AActor owner = base.GetOwner();
             if (owner == null)
             {
@@ -39,7 +41,8 @@ namespace GreatSageMod
                 BUS_GSEventCollection bus_GSEventCollection = BUS_EventCollectionCS.Get(owner);
                 if (bus_GSEventCollection != null)
                 {
-                    BeforeSwitchWeaponPose(owner);
+                    //BeforeSwitchWeaponPose(owner);
+                    Console.WriteLine($"OnTriggerInputAction!! TriggerEvent: {TriggerEvent} End!! Next Step Is Delegate!");
                     bus_GSEventCollection.Evt_SwitchWeaponPoseByType.Invoke(stanceType);
                 }
                 return true;
