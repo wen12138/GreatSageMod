@@ -10,7 +10,7 @@ using b1.ECS;
 
 namespace GreatSageMod
 {
-    [HarmonyPatch(typeof(BGUPlayerCharacterCS), "AfterInitAllComp")]
+    [HarmonyPatch(typeof(BGUPlayerCharacterCS), "InitAllComp")]
     public class PatchCharacterCS
     {
         private static void Postfix(BGUPlayerCharacterCS __instance)
@@ -32,7 +32,6 @@ namespace GreatSageMod
                 }
 
                 var oriComp = entMgr?.GetObject<b1.BUS_QiTianDaShengComp>(__instance.ECSEntity);
-                var newComp = new BUS_QiTianDaShengComp();
                 if (oriComp != null)
                 {
                     Type compContainerType = __instance.ActorCompContainerCS.GetType();
@@ -45,8 +44,7 @@ namespace GreatSageMod
                             var compList = compCSs.GetValue(__instance.ActorCompContainerCS) as List<UActorCompBaseCS>;
                             compList.Remove(oriComp);
                             removeCount++;
-                            compList.Add(newComp);
-                            Console.WriteLine("从CompCSs移除了原始的齐天大圣组件"); 
+                            Console.WriteLine("Remove Origin QTDSComp Form CompCSs"); 
                         }
                     }
 
@@ -57,15 +55,14 @@ namespace GreatSageMod
                             var compList = compCSs.GetValue(__instance.ActorCompContainerCS) as List<UActorCompBaseCS>;
                             compList.Remove(oriComp);
                             removeCount++;
-                            compList.Add(newComp);
-                            Console.WriteLine("从CompCSsToBeginPlay移除了原始的齐天大圣组件");
+                            Console.WriteLine("Remove Origin QTDSComp From CompCSsToBeginPlay");
                         }
                     }
 
                     if (removeCount == 2)
                     {
                         entMgr.RemoveObject(__instance.ECSEntity, oriComp);
-                        Console.WriteLine("从EntityManager中移除了原始的齐天大圣组件");
+                        Console.WriteLine("Remove Origin QTDSComp From EntityManager");
 
                         if (oriComp.IsNetActive())
                         {
@@ -73,16 +70,13 @@ namespace GreatSageMod
                         }
 
                         oriComp.OnEndPlay(UnrealEngine.Engine.EEndPlayReason.Destroyed);
-
-                        newComp.Init(__instance.ActorCompContainerCS);
-                        newComp.OnAttach();
-                        entMgr.SetObject(__instance.ECSEntity, TypeManager.GetTypeIndex<b1.BUS_QiTianDaShengComp>(), newComp);
+                        __instance.ActorCompContainerCS.RegisterUnitComp<BUS_QiTianDaShengComp>(int.MinValue, (EActorCompAlterFlag)0L, (EActorCompRejectFlag)0L, int.MaxValue, 0);
+                        Console.WriteLine("Replace QTDS Comp Successfully!");
                     }
 
-                    Console.WriteLine("成功替换天命人齐天大圣组件!");
                 }
                 else
-                    Console.WriteLine("无法替换天命人齐天大圣组件!");
+                    Console.WriteLine("Replace QTDS Comp Failed");
             }
         }
 

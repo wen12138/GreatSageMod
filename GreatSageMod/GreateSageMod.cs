@@ -18,7 +18,7 @@ namespace GreatSageMod
 
         public void Init()
         {
-            Console.WriteLine("初始化齐天大圣Mod!!!");
+            Console.WriteLine("Init Greate Sage Mod!!!");
             m_Harmony = new Harmony("GreateSageMode.Patch");
             m_Harmony.PatchAll();
         }
@@ -26,7 +26,7 @@ namespace GreatSageMod
         public void DeInit()
         {
             m_Harmony?.UnpatchAll();
-            Console.WriteLine("解除齐天大圣Mod!!!");
+            Console.WriteLine("Uninit Greate Sage Mod!!!");
         }
 
     }

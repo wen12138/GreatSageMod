@@ -11,7 +11,6 @@ namespace GreatSageMod
 {
     public class BUIASwitchWeaponPoseHeavy : BUIASwitchWeaponPoseBase
     {
-        // Token: 0x0601147E RID: 70782 RVA: 0x00498905 File Offset: 0x00496B05
         public BUIASwitchWeaponPoseHeavy()
         {
             this.InputActionType = EInputActionType.SwitchWeaponPoseHeavy;
@@ -30,12 +29,11 @@ namespace GreatSageMod
                 BUS_GSEventCollection bus_GSEventCollection = BUS_EventCollectionCS.Get(player);
                 if (bus_GSEventCollection != null)
                 {
-                    bus_GSEventCollection.Evt_TriggerBanTrans2DaSheng.Invoke();
+                    bus_GSEventCollection.Evt_ResetDaShengStatus.Invoke();
                 }
             }
         }
 
-        // Token: 0x0601147F RID: 70783 RVA: 0x000304B5 File Offset: 0x0002E6B5
         protected override int GetStanceType()
         {
             return 0;
