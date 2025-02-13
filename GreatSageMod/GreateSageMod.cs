@@ -3,6 +3,7 @@ using HarmonyLib;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -18,15 +19,15 @@ namespace GreatSageMod
 
         public void Init()
         {
-            Console.WriteLine("Init Greate Sage Mod!!!");
+            Utils.Log("Init Greate Sage Mod!!!");
             m_Harmony = new Harmony("GreateSageMode.Patch");
-            m_Harmony.PatchAll();
+            m_Harmony.PatchAll(Assembly.GetExecutingAssembly());
         }
 
         public void DeInit()
         {
             m_Harmony?.UnpatchAll();
-            Console.WriteLine("Uninit Greate Sage Mod!!!");
+            Utils.Log("Uninit Greate Sage Mod!!!");
         }
 
     }

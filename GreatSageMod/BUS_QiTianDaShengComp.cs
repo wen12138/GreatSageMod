@@ -43,11 +43,11 @@ namespace GreatSageMod
             var gameplayer = GSGBtl.GetLocalPlayerContainer().GamePlayer;
             if (gameplayer == null)
             {
-                Console.WriteLine("New QTSD Comp Get Gameplayer Failed!");
+                Utils.Log("New QTSD Comp Get Gameplayer Failed!");
                 return;
             }
 
-            Console.WriteLine("New QTSD Comp Get Gameplayer Successfully!!");
+            Utils.Log("New QTSD Comp Get Gameplayer Successfully!!");
             var type = gameplayer.GetType();
             var field = type.GetField("RootData", System.Reflection.BindingFlags.Instance | System.Reflection.BindingFlags.NonPublic);
             if (field != null)
@@ -57,11 +57,11 @@ namespace GreatSageMod
                 {
                     m_PreStance = RoleData.RoleCs.Actor.Wear.Stance;
 
-                    Console.WriteLine($"New QTSD Comp Get Roleplayer Data Successfully!! Current Stance: {m_PreStance}");
+                    Utils.Log($"New QTSD Comp Get Roleplayer Data Successfully!! Current Stance: {m_PreStance}");
                 }
                 else
                 {
-                    Console.WriteLine("New QTSD Comp Get Roleplayer Data Failed!!!");
+                    Utils.Log("New QTSD Comp Get Roleplayer Data Failed!!!");
                 }
             }
         }
@@ -122,7 +122,7 @@ namespace GreatSageMod
 
         private void InitDaShengConfig()
         {
-            Console.WriteLine("InitDaShengConfig Begin!");
+            Utils.Log("InitDaShengConfig Begin!");
 
             this.QiTianDaShengData.PreDaSheng_BeginTriggerEffectIDList = new List<int>();
             this.QiTianDaShengData.PreDaSheng_BeginTriggerBuffIDList = new List<int>();
@@ -132,7 +132,7 @@ namespace GreatSageMod
             this.QiTianDaShengData.DaSheng_SustainTriggerBuffIDList = new List<int>() { 601, 602 };
             this.QiTianDaShengData.HasValidDescInfo = true;
 
-            Console.WriteLine("InitDaShengConfig Finish!");
+            Utils.Log("InitDaShengConfig Finish!");
         }
 
         private void OnTriggerTrans2DaSheng()

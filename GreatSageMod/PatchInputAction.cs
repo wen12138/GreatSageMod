@@ -26,7 +26,7 @@ namespace GreatSageMod
                     map[EInputActionType.SwitchWeaponPoseProp] = new BUIASwitchWeaponPoseProp();
                     map[EInputActionType.SwitchWeaponPosePoke] = new BUIASwitchWeaponPosePoke();
 
-                    Console.WriteLine("Replace SwitchWeaponPost Class Succ!");
+                    Utils.Log("Replace SwitchWeaponPose Class Succ!");
                 }
             }
         }

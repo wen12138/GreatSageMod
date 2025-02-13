@@ -44,7 +44,7 @@ namespace GreatSageMod
                             var compList = compCSs.GetValue(__instance.ActorCompContainerCS) as List<UActorCompBaseCS>;
                             compList.Remove(oriComp);
                             removeCount++;
-                            Console.WriteLine("Remove Origin QTDSComp Form CompCSs"); 
+                            Utils.Log("Remove Origin QTDSComp Form CompCSs"); 
                         }
                     }
 
@@ -55,14 +55,14 @@ namespace GreatSageMod
                             var compList = compCSs.GetValue(__instance.ActorCompContainerCS) as List<UActorCompBaseCS>;
                             compList.Remove(oriComp);
                             removeCount++;
-                            Console.WriteLine("Remove Origin QTDSComp From CompCSsToBeginPlay");
+                            Utils.Log("Remove Origin QTDSComp From CompCSsToBeginPlay");
                         }
                     }
 
                     if (removeCount == 2)
                     {
                         entMgr.RemoveObject(__instance.ECSEntity, oriComp);
-                        Console.WriteLine("Remove Origin QTDSComp From EntityManager");
+                        Utils.Log("Remove Origin QTDSComp From EntityManager");
 
                         if (oriComp.IsNetActive())
                         {
@@ -71,12 +71,12 @@ namespace GreatSageMod
 
                         oriComp.OnEndPlay(UnrealEngine.Engine.EEndPlayReason.Destroyed);
                         __instance.ActorCompContainerCS.RegisterUnitComp<BUS_QiTianDaShengComp>(int.MinValue, (EActorCompAlterFlag)0L, (EActorCompRejectFlag)0L, int.MaxValue, 0);
-                        Console.WriteLine("Replace QTDS Comp Successfully!");
+                        Utils.Log("Replace QTDS Comp Successfully!");
                     }
 
                 }
                 else
-                    Console.WriteLine("Replace QTDS Comp Failed");
+                    Utils.Log("Replace QTDS Comp Failed");
             }
         }
 
