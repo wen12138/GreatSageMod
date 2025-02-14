@@ -4,7 +4,7 @@
 将立棍法替换为无限时长的大圣模式，可以在任意地图，无需根器和穿戴大圣五件套的情况下进入大圣模式。
 还可以随时从大圣模式切换回劈棍和立棍。
 
-注意: 需要黑神话:悟空游戏文件夹内已有CSharpLoader才可使用该Mod
+注意: 需要黑神话:悟空游戏文件夹内已有CSharpLoader with hook才可使用该Mod
 ## CSharpLoader
 Github仓库地址:https://github.com/czastack/B1CSharpLoader
 N网地址:https://www.nexusmods.com/blackmythwukong/mods/664
