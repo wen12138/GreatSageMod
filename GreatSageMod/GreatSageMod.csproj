@@ -1,0 +1,117 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{02A23E55-0631-471D-A0DF-4E227E0A8FFA}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>GreatSageMod</RootNamespace>
+    <AssemblyName>GreatSageMod</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="0Harmony, Version=2.3.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>packages\Lib.Harmony.2.3.5\lib\net472\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="b1.Native">
+      <HintPath>..\..\B1CSharpLoader\GameDll\b1.Native.dll</HintPath>
+    </Reference>
+    <Reference Include="b1.NativePlugins">
+      <HintPath>..\..\B1CSharpLoader\GameDll\b1.NativePlugins.dll</HintPath>
+    </Reference>
+    <Reference Include="B1UI_GSE.Script">
+      <HintPath>..\..\B1CSharpLoader\GameDll\B1UI_GSE.Script.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="BtlSvr.Main">
+      <HintPath>..\..\B1CSharpLoader\GameDll\BtlSvr.Main.dll</HintPath>
+    </Reference>
+    <Reference Include="CSharpModBase">
+      <HintPath>..\..\B1CSharpLoader\CSharpModBase\bin\Debug\net472\CSharpModBase.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Google.Protobuf">
+      <HintPath>..\..\B1CSharpLoader\GameDll\Google.Protobuf.dll</HintPath>
+    </Reference>
+    <Reference Include="GSE.Core">
+      <HintPath>..\..\B1CSharpLoader\GameDll\GSE.Core.dll</HintPath>
+    </Reference>
+    <Reference Include="GSE.ProtobufDB">
+      <HintPath>..\..\B1CSharpLoader\GameDll\GSE.ProtobufDB.dll</HintPath>
+    </Reference>
+    <Reference Include="Protobuf.RunTime">
+      <HintPath>..\..\B1CSharpLoader\GameDll\Protobuf.RunTime.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Core">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Data">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Net.Http">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Xml">
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="UnrealEngine">
+      <HintPath>..\..\B1CSharpLoader\GameDll\UnrealEngine.dll</HintPath>
+    </Reference>
+    <Reference Include="UnrealEngine.Runtime">
+      <HintPath>..\..\B1CSharpLoader\GameDll\UnrealEngine.Runtime.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="BUIASwitchWeaponPoseBase.cs" />
+    <Compile Include="BUIASwitchWeaponPoseHeavy.cs" />
+    <Compile Include="BUIASwitchWeaponPosePoke.cs" />
+    <Compile Include="BUIASwitchWeaponPoseProp.cs" />
+    <Compile Include="BUS_QiTianDaShengComp.cs" />
+    <Compile Include="GreateSageMod.cs" />
+    <Compile Include="PatchCharacterCS.cs" />
+    <Compile Include="PatchInputAction.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>copy "$(TargetPath)" "E:\SteamLibrary\steamapps\common\BlackMythWukong\b1\Binaries\Win64\CSharpLoader\Mods\GreatSageMod\" /Y</PostBuildEvent>
+  </PropertyGroup>
+</Project>
