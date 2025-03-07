@@ -6,7 +6,9 @@
 - 无限时长,任意地图,无需根器,无需大圣五件套,无需五段棍启动,不受大圣残躯二阶段影响
 - 随时从大圣模式切换回劈棍和立棍。
 
-- 注意: 需要黑神话:悟空游戏文件夹内已有CSharpLoader with hook才可使用该Mod
+> [!IMPORTANT]
+> 
+>  注意: 需要黑神话:悟空游戏文件夹内已有CSharpLoader with hook才可使用该Mod
 
 ## 项目使用和Mod使用
 
@@ -26,7 +28,10 @@
 - Replace pillar stance with Great Sage Mode
 - No time limit. No map limit. No relic limit. No equipment limit. Don't Need five focus points. Not affected by the second stage of the Great Sage's Broken Body
 - Switch back to smash stance or thrust stance any time.
-- **Attention**: This mod dependent on CSharpLoader with hook, you should download it in advance.
+
+> [!IMPORTANT]
+> 
+> Attention: This mod dependent on CSharpLoader with hook, you should download it in advance.
 
 ## How to use the project and mod
 Complie the project by using Visual Studio or Rider, and you can get "GreatSageMod.dll" in output path.
