@@ -13,7 +13,7 @@ namespace GreatSageMod
     {
         public string Name => "GreatSage";
 
-        public string Version => "0.0.1";
+        public string Version => "0.0.2";
 
         private Harmony m_Harmony;
 
