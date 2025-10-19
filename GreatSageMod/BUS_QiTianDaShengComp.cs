@@ -263,7 +263,7 @@ namespace GreatSageMod
             foreach (int buffID in this.QiTianDaShengData.PreDaSheng_BeginTriggerBuffIDList)
             {
                 BuffDescRuntime buffDescRuntime = BGW_GameDB.GetBuffDescRuntime(buffID, this.PassiveSkillData);
-                if (buffDescRuntime != null)
+                if (buffDescRuntime.IsValid())
                 {
                     base.BUSEventCollection.Evt_BuffAdd.Invoke(buffID, this.Owner, this.Owner, (float)buffDescRuntime.GetDuration(), EBuffSourceType.Trans2DaSheng, false, default(FBattleAttrSnapShot));
                 }
@@ -312,7 +312,7 @@ namespace GreatSageMod
             foreach (int buffID3 in this.QiTianDaShengData.DaSheng_BeginTriggerBuffIDList)
             {
                 BuffDescRuntime buffDescRuntime = BGW_GameDB.GetBuffDescRuntime(buffID3, this.PassiveSkillData);
-                if (buffDescRuntime != null)
+                if (buffDescRuntime.IsValid())
                 {
                     base.BUSEventCollection.Evt_BuffAdd.Invoke(buffID3, this.Owner, this.Owner, (float)buffDescRuntime.GetDuration(), EBuffSourceType.Trans2DaSheng, false, default(FBattleAttrSnapShot));
                 }
