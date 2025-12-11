@@ -17,6 +17,9 @@ namespace GreatSageMod
 
         private Harmony m_Harmony;
 
+        public static bool Prop2DaSheng = false;
+        public static BUS_QiTianDaShengComp DaShengComp;
+
         public void Init()
         {
             Utils.Log("Init Greate Sage Mod!!!");

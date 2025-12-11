@@ -18,6 +18,8 @@ namespace GreatSageMod
 
         protected override void BeforeSwitchWeaponPose(AActor player)
         {
+            GreateSageMod.Prop2DaSheng = false;
+
             if (player == null)
             {
                 Console.WriteLine("角色为空!");

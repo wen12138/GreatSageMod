@@ -12,7 +12,7 @@ namespace GreatSageMod
 {
     public class BUS_QiTianDaShengComp : b1.BUS_QiTianDaShengComp
     {
-        private DSRoleData RoleData;
+        public DSRoleData RoleData;
         private Stance m_PreStance;
         private bool bHasInit = false;
         private BUC_QiTianDaShengData QiTianDaShengData;
@@ -30,6 +30,8 @@ namespace GreatSageMod
             base.BUSEventCollection.Evt_TriggerBanTrans2DaSheng += this.OnTriggerBanTrans2DaSheng;
             base.BUSEventCollection.Evt_ResetDaShengStatus += this.OnResetDaShengStatus;
             base.BUSEventCollection.Evt_AfterUnitRebirth += this.OnAfterUnitRebirth;
+
+            GreateSageMod.DaShengComp = this;
         }
 
         public override void OnBeginPlay()
@@ -117,7 +119,7 @@ namespace GreatSageMod
 
         private bool IsInHGSLevel()
         {
-            return RoleData.RoleCs.Actor.Wear.Stance == Stance.Prop;
+            return RoleData.RoleCs.Actor.Wear.Stance == Stance.Prop && GreateSageMod.Prop2DaSheng;
         }
 
         private void InitDaShengConfig()
@@ -166,7 +168,7 @@ namespace GreatSageMod
 
         private bool CheckCanKeepDaShengMode()
         {
-            return RoleData.RoleCs.Actor.Wear.Stance == Stance.Prop;
+            return RoleData.RoleCs.Actor.Wear.Stance == Stance.Prop && GreateSageMod.Prop2DaSheng;
         }
 
         private void TrySwitch2LittleMonkey(EDaShengStage LastStage)
