@@ -119,7 +119,7 @@ namespace GreatSageMod
 
         private bool IsInHGSLevel()
         {
-            return RoleData.RoleCs.Actor.Wear.Stance == Stance.Prop && GreateSageMod.Prop2DaSheng;
+            return GreateSageMod.Stance2DaSheng;
         }
 
         private void InitDaShengConfig()
@@ -168,7 +168,7 @@ namespace GreatSageMod
 
         private bool CheckCanKeepDaShengMode()
         {
-            return RoleData.RoleCs.Actor.Wear.Stance == Stance.Prop && GreateSageMod.Prop2DaSheng;
+            return GreateSageMod.Stance2DaSheng;
         }
 
         private void TrySwitch2LittleMonkey(EDaShengStage LastStage)

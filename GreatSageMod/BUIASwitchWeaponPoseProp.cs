@@ -21,32 +21,38 @@ namespace GreatSageMod
         {
             if (player == null)
             {
-                Console.WriteLine("角色为空!");
+                Utils.Log("player is null!");
+                return;
+            }
+
+            BUS_GSEventCollection bus_GSEventCollection = BUS_EventCollectionCS.Get(player);
+
+            if (bus_GSEventCollection == null)
+            {
+                Utils.Log("bus_GSEventCollection is null!");
                 return;
             }
 
             if (player != null && player as ABGUCharacter != null && player.World != null && GreateSageMod.DaShengComp != null)
             {
-                if (GreateSageMod.DaShengComp.RoleData.RoleCs.Actor.Wear.Stance == ArchiveB1.Stance.Prop)
+                bool isAlreadyInProp = GreateSageMod.DaShengComp.RoleData.RoleCs.Actor.Wear.Stance == ArchiveB1.Stance.Prop;
+                if (isAlreadyInProp)
                 {
-                    if (GreateSageMod.Prop2DaSheng)
+                    if (GreateSageMod.Stance2DaSheng)
                     {
-                        GreateSageMod.Prop2DaSheng = false;
-                        BUS_GSEventCollection bus_GSEventCollection = BUS_EventCollectionCS.Get(player);
-                        if (bus_GSEventCollection != null)
-                        {
-                            bus_GSEventCollection.Evt_ResetDaShengStatus.Invoke();
-                        }
+                        GreateSageMod.Stance2DaSheng = false;
+                        bus_GSEventCollection.Evt_ResetDaShengStatus.Invoke();
                     }
-                    else
+                    else if (GreateSageMod.Config.EnterGreatSageModeFromPillarStance)
                     {
-                        GreateSageMod.Prop2DaSheng = true;
-                        BUS_GSEventCollection bus_GSEventCollection = BUS_EventCollectionCS.Get(player);
-                        if (bus_GSEventCollection != null)
-                        {
-                            bus_GSEventCollection.Evt_TriggerTrans2DaSheng.Invoke();
-                        }
+                        GreateSageMod.Stance2DaSheng = true;
+                        bus_GSEventCollection.Evt_TriggerTrans2DaSheng.Invoke();
                     }
+                }
+                else
+                {
+                    GreateSageMod.Stance2DaSheng = false;
+                    bus_GSEventCollection.Evt_ResetDaShengStatus.Invoke();
                 }
             }
         }

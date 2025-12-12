@@ -2,9 +2,17 @@
 
 ## Mod效果
 
-- 将立棍法替换为大圣模式
+- 在普通棍法时,再次按下当前棍法按键即可进入大圣模式(默认只可以在立棍法进入)
+- 在大圣模式时,按下任意普通棍法按键即可切换回普通棍法。
 - 无限时长,任意地图,无需根器,无需大圣五件套,无需五段棍启动,不受大圣残躯二阶段影响
-- 随时从大圣模式切换回劈棍和立棍。
+- 可以通过修改配置文件 "GreatSageConfig.json" 调整可以从哪些普通棍法进入大圣模式
+
+## 配置文件介绍
+- EnterGreatSageModeFromSmashStance 是否可以在劈棍法时再次按下劈棍法键进入大圣模式
+- EnterGreatSageModeFromPillarStance ~立棍法时~
+- EnterGreatSageModeFromThrustStance ~戳棍法时~
+- true 为可以，false 为不可以
+- 修改配置文件后需要重新启动游戏才可以生效
 
 > [!IMPORTANT]
 > 
@@ -25,9 +33,17 @@
 
 ## Mod Effects
 
-- Replace pillar stance with Great Sage Mode
-- No time limit. No map limit. No relic limit. No equipment limit. Don't Need five focus points. Not affected by the second stage of the Great Sage's Broken Body
-- Switch back to smash stance or thrust stance any time.
+- In normal stance, press current stance button again will enter Great Sage mode(Only can enter in pillar stance at default).
+- In Great Sage mode, press any normal stance button will switch back to normal stance.
+- No time limit. No map limit. No relic limit. No equipment limit. Don't Need five focus points. Don't be affected by the second stage of the Great Sage's Broken Body.
+- You can adjust which stance can enter Great Sage Mode by modifying the config file "GreatSageConfig.json".
+
+## Config File
+- EnterGreatSageModeFromSmashStance Can enter Great Sage mode in smash stance
+- EnterGreatSageModeFromPillarStance ~ in pillar stance
+- EnterGreatSageModeFromThrustStance  ~ in thrust stance
+- true is yes, false is no
+- To apply the modification of the config file, you should restart the game application.
 
 > [!IMPORTANT]
 > 
